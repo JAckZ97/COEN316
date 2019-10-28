@@ -1,0 +1,899 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Creator: nlviewTK
+%%Title: module-.work.alu.rtl_XRTL
+%%BoundingBox: 28 28 584 764
+%%Pages: (atend)
+%%DocumentData: Clean7Bit
+%%DocumentNeededResources: font Helvetica
+%%EndComments
+
+%%BeginProlog
+50 dict begin
+/rectpath {
+    newpath 2 copy moveto
+    4 1 roll 1 index lineto
+    2 copy lineto
+    pop exch lineto
+    closepath
+} bind def
+/line {
+    newpath moveto lineto stroke
+} bind def
+/rect {
+    newpath rectpath stroke
+} bind def
+/filledrect {
+    newpath rectpath fill
+} bind def
+/dot {
+                                        % stack: offset x y
+    newpath moveto                      % stack: offset
+    dup dup rmoveto 2 mul               % stack: 2off
+    0 exch dup neg dup 0 exch 0 exch    % stack: 0 2off -2off 0 0 -2off
+    rlineto rlineto rlineto             % stack: 
+    closepath gsave fill grestore stroke
+} bind def
+/circle {
+    newpath 2 div 0 360 arc stroke
+} bind def
+/filledcircle {
+    newpath 2 div 0 360 arc fill
+} bind def
+/arcus {
+    newpath arc stroke
+} bind def
+/filledtriangle {
+    newpath moveto
+    lineto
+    lineto
+    closepath gsave fill grestore stroke
+} bind def
+/text {
+                                        % stack: x y rot just_x just_y (str)
+    gsave
+    6 4 roll moveto                     % stack: rot just_x just_y (str)
+    dup stringwidth pop /wid exch def   % string width --> wid
+    4 3 roll                            % stack: just_x just_y (str) rot
+    rotate
+    3 1 roll                            % stack: (str) just_x just_y
+    Fdescent exch
+    2 div Fdescent Fascent add mul sub  % desc - just_y/2 * (asc+desc)
+                                        % stack: (str) just_x ymove
+    exch
+    2 div wid mul neg                   % -just_x/2 * wid
+                                        % stack: (str) ymove xmove
+    exch rmoveto                        % stack: (str)
+    show                                % stack:
+    grestore
+} bind def
+/textsize {
+    currentdict /Ffac known not {
+        % Here we compute Ffac. Ffac is used below to resize the font
+        % in a way that the font's ascent+descent/2 fits the required
+        % text size. We compute Ffac only once, because the font F will
+        % never change.
+        %
+        dup dup F exch scalefont setfont % stack sz sz font
+        gsave
+        newpath 0 0 moveto (XTgq) false charpath
+        pathbbox                        % stack: sz sz l b r t
+        grestore
+        3 2 roll neg 2 div add          % fheight = ascent + descent/2
+        3 1 roll pop pop                % stack: sz sz fheight
+        div
+        /Ffac exch def                  % Ffac = sz/fheight
+    } if
+    Ffac mul F exch scalefont setfont
+    gsave
+    newpath
+    0 0 moveto (XTgq) false charpath pathbbox
+    /Fascent exch def			% top -> ascent
+    pop
+    /Fdescent exch neg 2 div def	% -bottom/2 -> descent
+    pop
+    grestore
+} bind def
+
+% Define the array ISOLatin1Encoding (which specifies how characters are
+% encoded for ISO-8859-1 fonts), if it isn't already present (Postscript
+% level 2 is supposed to define it, but level 1 doesn't).
+systemdict /ISOLatin1Encoding known not {
+    /ISOLatin1Encoding [
+	/space /space /space /space /space /space /space /space
+	/space /space /space /space /space /space /space /space
+	/space /space /space /space /space /space /space /space
+	/space /space /space /space /space /space /space /space
+	/space /exclam /quotedbl /numbersign /dollar /percent /ampersand
+	    /quoteright
+	/parenleft /parenright /asterisk /plus /comma /minus /period /slash
+	/zero /one /two /three /four /five /six /seven
+	/eight /nine /colon /semicolon /less /equal /greater /question
+	/at /A /B /C /D /E /F /G
+	/H /I /J /K /L /M /N /O
+	/P /Q /R /S /T /U /V /W
+	/X /Y /Z /bracketleft /backslash /bracketright /asciicircum
+	/underscore /quoteleft /a /b /c /d /e /f /g
+	/h /i /j /k /l /m /n /o
+	/p /q /r /s /t /u /v /w
+	/x /y /z /braceleft /bar /braceright /asciitilde /space
+	/space /space /space /space /space /space /space /space
+	/space /space /space /space /space /space /space /space
+	/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent
+	/dieresis /space /ring /cedilla /space /hungarumlaut /ogonek /caron
+	/space /exclamdown /cent /sterling /currency /yen /brokenbar /section
+	/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen
+	    /registered /macron
+	/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph
+	    /periodcentered
+	/cedillar /onesuperior /ordmasculine /guillemotright /onequarter
+	    /onehalf /threequarters /questiondown
+	/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla
+	/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex
+	    /Idieresis
+	/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis
+	    /multiply
+	/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn
+	    /germandbls
+	/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla
+	/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex
+	    /idieresis
+	/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide
+	/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn
+	    /ydieresis
+    ] def
+} if
+
+% font ISOEncode font
+% This procedure changes the encoding of a font from the default
+% Postscript encoding to ISOLatin1. The body of this procedure comes
+% from Section 5.6.1 of the Postscript book.
+/ISOEncode {
+    dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding ISOLatin1Encoding def
+	currentdict
+    end
+    /Fname exch definefont
+} bind def
+%%EndProlog
+
+%%BeginSetup
+%%IncludeResource: font Helvetica
+<< /PageSize [612 792] /Policies << /PageSize 3 >> >> setpagedevice
+%%EndSetup
+
+%%Page: 1 1
+save
+90 rotate
+0 -792 translate
+27.7 764.3 764.2 207.8 rectpath
+clip
+/F /Helvetica findfont ISOEncode def
+1 setlinecap 		% round caps
+1 setlinejoin		% round joins
+0.2 setlinewidth
+571.7 562.1 571.7 563.8 line
+568.4 563.8 575 563.8 line
+160.6 403.4 newpath moveto
+158.3 401.1 lineto
+153.6 401.1 lineto
+153.6 405.7 lineto
+158.3 405.7 lineto
+160.6 403.4 lineto
+stroke
+2.3378 textsize
+152.3 403.4 0 2 1 (add_sub) text
+0.6 setlinewidth
+160.6 411.5 newpath moveto
+158.3 409.2 lineto
+153.6 409.2 lineto
+153.6 413.8 lineto
+158.3 413.8 lineto
+160.6 411.5 lineto
+stroke
+152.3 411.5 0 2 1 (y\(31:0\)) text
+160.6 587.8 newpath moveto
+158.3 585.5 lineto
+153.6 585.5 lineto
+153.6 590.1 lineto
+158.3 590.1 lineto
+160.6 587.8 lineto
+stroke
+152.3 587.8 0 2 1 (x\(31:0\)) text
+196 428.8 2.7 circle
+184.7 428.8 newpath moveto
+184.7 432.8 lineto
+194.7 428.8 lineto
+184.7 424.8 lineto
+184.7 428.8 lineto
+stroke
+180.7 428.8 184.7 428.8 line
+2.0039 textsize
+184 429.1 0 2 0 (in) text
+201.4 428.8 197.4 428.8 line
+198.1 429.1 0 0 0 (out) text
+2.3378 textsize
+185.4 433.5 0 0 0 (output_3n1s1_invBus7\(31:0\)) text
+0.2 setlinewidth
+267.8 447.5 2.7 circle
+256.5 447.5 newpath moveto
+256.5 451.5 lineto
+266.5 447.5 lineto
+256.5 443.5 lineto
+256.5 447.5 lineto
+stroke
+252.5 447.5 256.5 447.5 line
+2.0039 textsize
+255.8 447.8 0 2 0 (in) text
+273.2 447.5 269.2 447.5 line
+269.9 447.8 0 0 0 (out) text
+2.3378 textsize
+257.2 452.2 0 0 0 (ix19) text
+633.9 439.2 newpath moveto
+633.9 441.5 lineto
+638.6 441.5 lineto
+640.9 439.2 lineto
+638.6 436.9 lineto
+633.9 436.9 lineto
+633.9 439.2 lineto
+stroke
+642.2 439.2 0 0 1 (overflow) text
+0.6 setlinewidth
+160.6 579.8 newpath moveto
+158.3 577.5 lineto
+153.6 577.5 lineto
+153.6 582.1 lineto
+158.3 582.1 lineto
+160.6 579.8 lineto
+stroke
+152.3 579.8 0 2 1 (func\(1:0\)) text
+0.2 setlinewidth
+196 459.5 2.7 circle
+184.7 459.5 newpath moveto
+184.7 463.5 lineto
+194.7 459.5 lineto
+184.7 455.5 lineto
+184.7 459.5 lineto
+stroke
+180.7 459.5 184.7 459.5 line
+2.0039 textsize
+184 459.8 0 2 0 (in) text
+201.4 459.5 197.4 459.5 line
+198.1 459.8 0 0 0 (out) text
+2.3378 textsize
+185.4 464.2 0 0 0 (ix15) text
+256.5 431.5 newpath moveto
+256.5 426.5 lineto
+264.8 426.5 lineto
+stroke
+264.86 431.50 5.00 -91 91 arcus
+264.8 436.5 newpath moveto
+256.5 436.5 lineto
+256.5 431.5 lineto
+stroke
+252.5 433.8 256.5 433.8 line
+2.0039 textsize
+256.2 433.8 0 2 0 (in[0]) text
+252.5 428.8 256.5 428.8 line
+256.2 428.8 0 2 0 (in[1]) text
+273.8 431.5 269.9 431.5 line
+270.2 431.5 0 0 0 (out) text
+2.3378 textsize
+257.2 436.8 0 0 0 (ix13) text
+582.92 439.20 6.52 -50 50 arcus
+587.1 434.2 592.1 434.2 line
+591.25 445.18 11.01 -86 -33 arcus
+591.25 433.22 11.01 33 86 arcus
+592.1 444.2 587.1 444.2 line
+583.1 441.5 588.8 441.5 line
+2.0039 textsize
+586.8 441.5 0 2 0 (in[0]) text
+583.1 436.5 588.8 436.5 line
+586.8 436.5 0 2 0 (in[1]) text
+604.5 439.2 600.5 439.2 line
+600.8 439.2 0 0 0 (out) text
+2.3378 textsize
+587.8 444.5 0 0 0 (ix5) text
+477.6 436.5 newpath moveto
+477.6 431.5 lineto
+485.9 431.5 lineto
+stroke
+485.96 436.50 5.00 -91 91 arcus
+485.9 441.5 newpath moveto
+477.6 441.5 lineto
+477.6 436.5 lineto
+stroke
+473.6 438.8 477.6 438.8 line
+2.0039 textsize
+477.3 438.8 0 2 0 (in[0]) text
+473.6 433.8 477.6 433.8 line
+477.3 433.8 0 2 0 (in[1]) text
+494.9 436.5 491 436.5 line
+491.3 436.5 0 0 0 (out) text
+2.3378 textsize
+478.3 441.8 0 0 0 (ix29) text
+0.6 setlinewidth
+488.9 529.3 2.7 circle
+477.6 529.3 newpath moveto
+477.6 533.3 lineto
+487.6 529.3 lineto
+477.6 525.3 lineto
+477.6 529.3 lineto
+stroke
+473.6 529.3 477.6 529.3 line
+2.0039 textsize
+476.9 529.6 0 2 0 (in) text
+494.3 529.3 490.3 529.3 line
+491 529.6 0 0 0 (out) text
+2.3378 textsize
+478.3 534 0 0 0 (output_3n1s3_invBus8\(30:0\)) text
+345.9 567.8 2.7 circle
+334.6 567.8 newpath moveto
+334.6 571.8 lineto
+344.6 567.8 lineto
+334.6 563.8 lineto
+334.6 567.8 lineto
+stroke
+330.6 567.8 334.6 567.8 line
+2.0039 textsize
+333.9 568.1 0 2 0 (in) text
+351.3 567.8 347.3 567.8 line
+348 568.1 0 0 0 (out) text
+2.3378 textsize
+335.3 572.5 0 0 0 (logic_unit_out_2n1s4_invBus6\(31:0\)) text
+330.42 551.70 6.52 -50 50 arcus
+332.04 551.70 6.57 -50 50 arcus
+336.3 546.7 339.6 546.7 line
+338.75 557.68 11.01 -86 -33 arcus
+338.75 545.72 11.01 33 86 arcus
+339.6 556.7 336.3 556.7 line
+330.6 554.1 336.3 554.1 line
+2.0039 textsize
+334.3 554 0 2 0 (in[0]) text
+330.6 549.1 336.3 549.1 line
+334.3 549 0 2 0 (in[1]) text
+352 551.7 348 551.7 line
+348.3 551.7 0 0 0 (out) text
+2.3378 textsize
+335.3 557 0 0 0 (logic_unit_out_2n1s3_xorBus5\(31:0\)) text
+488.9 549.4 2.7 circle
+477.6 549.4 newpath moveto
+477.6 553.4 lineto
+487.6 549.4 lineto
+477.6 545.4 lineto
+477.6 549.4 lineto
+stroke
+473.6 549.4 477.6 549.4 line
+2.0039 textsize
+476.9 549.7 0 2 0 (in) text
+494.3 549.4 490.3 549.4 line
+491 549.7 0 0 0 (out) text
+2.3378 textsize
+478.3 554.1 0 0 0 (output_3n1s4_invBus9\(31:0\)) text
+252.32 539.70 6.52 -50 50 arcus
+256.5 534.7 261.5 534.7 line
+260.65 545.68 11.01 -86 -33 arcus
+260.65 533.72 11.01 33 86 arcus
+261.5 544.7 256.5 544.7 line
+252.5 542 258.2 542 line
+2.0039 textsize
+256.2 542 0 2 0 (in[0]) text
+252.5 537 258.2 537 line
+256.2 537 0 2 0 (in[1]) text
+273.8 539.7 269.9 539.7 line
+270.2 539.7 0 0 0 (out) text
+2.3378 textsize
+257.2 545 0 0 0 (logic_unit_out_2n1s2_orBus4\(31:0\)) text
+633.9 542 newpath moveto
+633.9 544.3 lineto
+638.6 544.3 lineto
+640.9 542 lineto
+638.6 539.7 lineto
+633.9 539.7 lineto
+633.9 542 lineto
+stroke
+642.2 542 0 0 1 (output\(31:0\)) text
+587.1 554.4 newpath moveto
+602.1 549.3 lineto
+602.1 534.7 lineto
+587.1 529.6 lineto
+587.1 554.4 lineto
+stroke
+583.1 549.4 587.1 549.4 line
+2.0039 textsize
+586.4 549.7 0 2 0 (a\(3\)) text
+583.1 544.4 587.1 544.4 line
+586.4 544.7 0 2 0 (a\(2\)) text
+583.1 539.4 587.1 539.4 line
+586.4 539.7 0 2 0 (a\(1\)) text
+583.1 534.4 587.1 534.4 line
+586.4 534.7 0 2 0 (a\(0\)) text
+592.1 526.3 592.1 531.3 line
+591.4 529.6 90 2 0 (b\(1\)) text
+597.1 526.3 597.1 533 line
+596.5 529.6 90 2 0 (b\(0\)) text
+606.1 542 602.1 542 line
+602.8 542.3 0 0 0 (d) text
+2.3378 textsize
+594.4 555 0 1 0 (output_mux_32Bus1\(31:0\)) text
+425.1 561.8 newpath moveto
+440.1 556.7 lineto
+440.1 542.1 lineto
+425.1 537 lineto
+425.1 561.8 lineto
+stroke
+421.1 556.7 425.1 556.7 line
+2.0039 textsize
+424.4 557.1 0 2 0 (a\(3\)) text
+421.1 551.7 425.1 551.7 line
+424.4 552.1 0 2 0 (a\(2\)) text
+421.1 546.7 425.1 546.7 line
+424.4 547.1 0 2 0 (a\(1\)) text
+421.1 541.7 425.1 541.7 line
+424.4 542.1 0 2 0 (a\(0\)) text
+430.1 533.7 430.1 538.7 line
+429.4 537 90 2 0 (b\(1\)) text
+435.1 533.7 435.1 540.4 line
+434.5 537 90 2 0 (b\(0\)) text
+444.2 549.4 440.1 549.4 line
+440.8 549.7 0 0 0 (d) text
+2.3378 textsize
+432.4 562.4 0 1 0 (logic_unit_out_mux_0Bus2\(31:0\)) text
+0.2 setlinewidth
+425.1 438.8 newpath moveto
+425.1 433.8 lineto
+433.4 433.8 lineto
+stroke
+433.46 438.80 5.00 -91 91 arcus
+433.4 443.8 newpath moveto
+425.1 443.8 lineto
+425.1 438.8 lineto
+stroke
+421.1 441.2 425.1 441.2 line
+2.0039 textsize
+424.8 441.1 0 2 0 (in[0]) text
+421.1 436.2 425.1 436.2 line
+424.8 436.1 0 2 0 (in[1]) text
+442.5 438.8 438.5 438.8 line
+438.8 438.8 0 0 0 (out) text
+2.3378 textsize
+425.8 444.1 0 0 0 (ix31) text
+334.6 441.2 newpath moveto
+334.6 436.2 lineto
+342.9 436.2 lineto
+stroke
+342.96 441.20 5.00 -91 91 arcus
+342.9 446.2 newpath moveto
+334.6 446.2 lineto
+334.6 441.2 lineto
+stroke
+330.6 438.5 334.6 438.5 line
+2.0039 textsize
+334.3 438.5 0 2 0 (in[0]) text
+330.6 443.5 334.6 443.5 line
+334.3 443.5 0 2 0 (in[1]) text
+352 441.2 348 441.2 line
+348.3 441.2 0 0 0 (out) text
+2.3378 textsize
+335.3 446.5 0 0 0 (ix11) text
+0.6 setlinewidth
+160.6 523.7 newpath moveto
+158.3 521.4 lineto
+153.6 521.4 lineto
+153.6 526 lineto
+158.3 526 lineto
+160.6 523.7 lineto
+stroke
+152.3 523.7 0 2 1 (logic_func\(1:0\)) text
+0.2 setlinewidth
+473.42 457.50 6.52 -50 50 arcus
+477.6 452.5 482.6 452.5 line
+481.75 463.48 11.01 -86 -33 arcus
+481.75 451.52 11.01 33 86 arcus
+482.6 462.5 477.6 462.5 line
+473.6 459.9 479.3 459.9 line
+2.0039 textsize
+477.3 459.8 0 2 0 (in[0]) text
+473.6 454.9 479.3 454.9 line
+477.3 454.8 0 2 0 (in[1]) text
+494.9 457.5 491 457.5 line
+491.3 457.5 0 0 0 (out) text
+2.3378 textsize
+478.3 462.8 0 0 0 (ix7) text
+425.1 454.9 newpath moveto
+425.1 449.9 lineto
+433.4 449.9 lineto
+stroke
+433.46 454.90 5.00 -91 91 arcus
+433.4 459.9 newpath moveto
+425.1 459.9 lineto
+425.1 454.9 lineto
+stroke
+421.1 457.2 425.1 457.2 line
+2.0039 textsize
+424.8 457.2 0 2 0 (in[0]) text
+421.1 452.2 425.1 452.2 line
+424.8 452.2 0 2 0 (in[1]) text
+442.5 454.9 438.5 454.9 line
+438.8 454.9 0 0 0 (out) text
+2.3378 textsize
+425.8 460.2 0 0 0 (ix25) text
+334.6 457.2 newpath moveto
+334.6 452.2 lineto
+342.9 452.2 lineto
+stroke
+342.96 457.20 5.00 -91 91 arcus
+342.9 462.2 newpath moveto
+334.6 462.2 lineto
+334.6 457.2 lineto
+stroke
+330.6 459.5 334.6 459.5 line
+2.0039 textsize
+334.3 459.5 0 2 0 (in[0]) text
+330.6 454.5 334.6 454.5 line
+334.3 454.5 0 2 0 (in[1]) text
+352 457.2 348 457.2 line
+348.3 457.2 0 0 0 (out) text
+2.3378 textsize
+335.3 462.5 0 0 0 (ix27) text
+334.6 473.2 newpath moveto
+334.6 468.2 lineto
+342.9 468.2 lineto
+stroke
+342.96 473.20 5.00 -91 91 arcus
+342.9 478.2 newpath moveto
+334.6 478.2 lineto
+334.6 473.2 lineto
+stroke
+330.6 475.6 334.6 475.6 line
+2.0039 textsize
+334.3 475.5 0 2 0 (in[0]) text
+330.6 470.6 334.6 470.6 line
+334.3 470.5 0 2 0 (in[1]) text
+352 473.2 348 473.2 line
+348.3 473.2 0 0 0 (out) text
+2.3378 textsize
+335.3 478.5 0 0 0 (ix21) text
+0.6 setlinewidth
+256.5 511.6 newpath moveto
+256.5 506.6 lineto
+264.8 506.6 lineto
+stroke
+264.86 511.60 5.00 -91 91 arcus
+264.8 516.6 newpath moveto
+256.5 516.6 lineto
+256.5 511.6 lineto
+stroke
+252.5 514 256.5 514 line
+2.0039 textsize
+256.2 513.9 0 2 0 (in[0]) text
+252.5 509 256.5 509 line
+256.2 508.9 0 2 0 (in[1]) text
+273.8 511.6 269.9 511.6 line
+270.2 511.6 0 0 0 (out) text
+2.3378 textsize
+257.2 516.9 0 0 0 (logic_unit_out_2n1s1_andBus3\(31:0\)) text
+0.2 setlinewidth
+420.92 470.90 6.52 -50 50 arcus
+425.1 465.9 430.1 465.9 line
+429.25 476.88 11.01 -86 -33 arcus
+429.25 464.92 11.01 33 86 arcus
+430.1 475.9 425.1 475.9 line
+421.1 468.2 426.8 468.2 line
+2.0039 textsize
+424.8 468.2 0 2 0 (in[0]) text
+421.1 473.2 426.8 473.2 line
+424.8 473.2 0 2 0 (in[1]) text
+442.5 470.9 438.5 470.9 line
+438.8 470.9 0 0 0 (out) text
+2.3378 textsize
+425.8 476.2 0 0 0 (ix9) text
+488.9 509.3 2.7 circle
+477.6 509.3 newpath moveto
+477.6 513.3 lineto
+487.6 509.3 lineto
+477.6 505.3 lineto
+477.6 509.3 lineto
+stroke
+473.6 509.3 477.6 509.3 line
+2.0039 textsize
+476.9 509.6 0 2 0 (in) text
+494.3 509.3 490.3 509.3 line
+491 509.6 0 0 0 (out) text
+2.3378 textsize
+478.3 514 0 0 0 (ix321) text
+593.8 477.9 13.4 circle
+587.1 485.2 589.4 482.9 line
+587.1 480.2 587.4 480.2 line
+600.5 480.2 600.1 480.2 line
+587.1 475.2 587.4 475.6 line
+587.1 470.2 589.4 472.9 line
+600.5 475.2 600.1 475.6 line
+583.1 485.3 587.1 485.3 line
+2.0039 textsize
+586.8 485.2 0 2 0 (mode) text
+583.1 480.3 587.1 480.3 line
+586.8 480.2 0 2 0 (cin) text
+604.5 480.3 600.5 480.3 line
+600.8 480.2 0 0 0 (cout) text
+0.6 setlinewidth
+583.1 475.2 587.1 475.2 line
+586.8 475.2 0 2 0 (a\(31:0\)) text
+583.1 470.2 587.1 470.2 line
+586.8 470.2 0 2 0 (b\(31:0\)) text
+604.5 475.2 600.5 475.2 line
+600.8 475.2 0 0 0 (d\(31:0\)) text
+2.3378 textsize
+593.8 477.9 0 1 1 (+/-) text
+592.8 488.9 0 0 0 (zero_addsub32_0) text
+0.2 setlinewidth
+633.9 498 newpath moveto
+633.9 500.3 lineto
+638.6 500.3 lineto
+640.9 498 lineto
+638.6 495.7 lineto
+633.9 495.7 lineto
+633.9 498 lineto
+stroke
+642.2 498 0 0 1 (zero) text
+352 457.2 421.1 457.2 line
+494.3 509.3 newpath moveto
+531.7 509.3 lineto
+531.7 542.7 lineto
+stroke
+531.7 541 533.3 539.4 line
+0.4 setlinewidth
+533.3 539.4 583.1 539.4 line
+0.2 setlinewidth
+531.7 542.7 533.3 544.4 line
+0.4 setlinewidth
+533.3 544.4 583.1 544.4 line
+0.2 setlinewidth
+442.5 470.9 newpath moveto
+458.2 470.9 lineto
+458.2 459.9 lineto
+473.6 459.9 lineto
+stroke
+352 473.2 421.1 473.2 line
+604.5 439.2 633.9 439.2 line
+442.5 438.8 473.6 438.8 line
+273.8 431.5 newpath moveto
+315.2 431.5 lineto
+315.2 438.5 lineto
+330.6 438.5 lineto
+stroke
+494.9 457.5 newpath moveto
+525 457.5 lineto
+525 441.5 lineto
+583.1 441.5 lineto
+stroke
+201.4 459.5 newpath moveto
+237.1 459.5 lineto
+237.1 433.8 lineto
+252.5 433.8 lineto
+stroke
+237.1 459.5 330.6 459.5 line
+0.6 237.1 459.5 dot
+494.9 436.5 583.1 436.5 line
+473.6 509.3 newpath moveto
+464.9 509.3 lineto
+464.9 521.3 lineto
+545 521.3 lineto
+545 498 lineto
+627.2 498 lineto
+627.2 476.9 lineto
+stroke
+627.2 498 633.9 498 line
+0.4 setlinewidth
+604.5 475.2 625.5 475.2 line
+0.2 setlinewidth
+625.5 475.2 627.2 476.9 line
+0.6 627.2 498 dot
+330.6 443.5 newpath moveto
+321.9 443.5 lineto
+321.9 485.3 lineto
+583.1 485.3 lineto
+stroke
+273.2 447.5 321.9 447.5 line
+321.9 470.6 330.6 470.6 line
+0.6 321.9 447.5 dot
+0.6 321.9 470.6 dot
+571.7 541 571.7 562.1 line
+571.7 541 573.4 539.4 line
+0.4 setlinewidth
+573.4 539.4 583.1 539.4 line
+0.2 setlinewidth
+160.6 403.4 243.8 403.4 line
+0.6 243.8 403.4 dot
+252.5 447.5 newpath moveto
+243.8 447.5 lineto
+243.8 403.4 lineto
+406.8 403.4 lineto
+stroke
+0.6 406.8 403.4 dot
+473.6 433.8 newpath moveto
+464.9 433.8 lineto
+464.9 403.4 lineto
+558.4 403.4 lineto
+558.4 480.3 lineto
+583.1 480.3 lineto
+stroke
+421.1 452.2 newpath moveto
+406.8 452.2 lineto
+406.8 403.4 lineto
+464.9 403.4 lineto
+stroke
+0.6 464.9 403.4 dot
+352 441.2 newpath moveto
+380 441.2 lineto
+380 468.2 lineto
+421.1 468.2 lineto
+stroke
+442.5 454.9 473.6 454.9 line
+0.6 setlinewidth
+160.6 587.8 newpath moveto
+167.3 587.8 lineto
+167.3 457.9 lineto
+stroke
+167.3 587.8 newpath moveto
+243.8 587.8 lineto
+243.8 514 lineto
+252.5 514 lineto
+stroke
+243.8 587.8 newpath moveto
+321.9 587.8 lineto
+321.9 554.1 lineto
+330.6 554.1 lineto
+stroke
+321.9 587.8 newpath moveto
+400.1 587.8 lineto
+400.1 439.5 lineto
+stroke
+400.1 587.8 newpath moveto
+551.7 587.8 lineto
+551.7 475.2 lineto
+583.1 475.2 lineto
+stroke
+0.6 167.3 587.8 dot
+243.8 542 252.5 542 line
+0.6 243.8 587.8 dot
+0.6 243.8 542 dot
+0.6 321.9 587.8 dot
+0.6 400.1 587.8 dot
+0.2 setlinewidth
+167.3 459.5 180.7 459.5 line
+400.1 441.2 421.1 441.2 line
+0.6 setlinewidth
+167.3 458.3 169.8 459.5 167.3 460.7 filledtriangle
+400.1 440 402.6 441.2 400.1 442.4 filledtriangle
+444.2 549.4 473.6 549.4 line
+352 551.7 421.1 551.7 line
+606.1 542 633.9 542 line
+494.3 529.3 newpath moveto
+525 529.3 lineto
+525 542.7 lineto
+stroke
+525 542.7 526.7 544.4 line
+0.4 setlinewidth
+526.7 544.4 583.1 544.4 line
+0.6 setlinewidth
+180.7 428.8 newpath moveto
+174 428.8 lineto
+174 411.5 lineto
+230.4 411.5 lineto
+stroke
+0.6 230.4 509 dot
+0.6 230.4 411.5 dot
+330.6 549.1 newpath moveto
+308.6 549.1 lineto
+308.6 411.5 lineto
+565.1 411.5 lineto
+565.1 470.2 lineto
+583.1 470.2 lineto
+stroke
+160.6 411.5 174 411.5 line
+0.6 174 411.5 dot
+252.5 537 newpath moveto
+230.4 537 lineto
+230.4 411.5 lineto
+308.6 411.5 lineto
+stroke
+0.6 308.6 411.5 dot
+230.4 509 252.5 509 line
+0.2 setlinewidth
+308.6 454.5 330.6 454.5 line
+0.6 setlinewidth
+308.6 453.3 311.1 454.5 308.6 455.7 filledtriangle
+351.3 567.8 newpath moveto
+380 567.8 lineto
+380 556.7 lineto
+421.1 556.7 lineto
+stroke
+160.6 579.8 newpath moveto
+558.4 579.8 lineto
+558.4 512.3 lineto
+stroke
+0.2 setlinewidth
+558.4 520.7 newpath moveto
+592.1 520.7 lineto
+592.1 526.3 lineto
+stroke
+558.4 514 newpath moveto
+597.1 514 lineto
+597.1 526.3 lineto
+stroke
+0.6 setlinewidth
+558.4 519.5 560.9 520.7 558.4 521.9 filledtriangle
+558.4 512.8 560.9 514 558.4 515.2 filledtriangle
+330.6 567.8 newpath moveto
+301.9 567.8 lineto
+301.9 539.7 lineto
+380 539.7 lineto
+380 546.7 lineto
+421.1 546.7 lineto
+stroke
+273.8 539.7 301.9 539.7 line
+0.6 301.9 539.7 dot
+315.2 473.9 newpath moveto
+315.2 531.7 lineto
+393.4 531.7 lineto
+393.4 541.7 lineto
+421.1 541.7 lineto
+stroke
+273.8 511.6 315.2 511.6 line
+0.6 315.2 511.6 dot
+0.2 setlinewidth
+315.2 475.6 330.6 475.6 line
+0.6 setlinewidth
+315.2 474.4 317.7 475.6 315.2 476.8 filledtriangle
+223.7 430.5 newpath moveto
+223.7 419.5 lineto
+386.7 419.5 lineto
+386.7 569.4 lineto
+458.2 569.4 lineto
+458.2 501.3 lineto
+538.3 501.3 lineto
+538.3 534.4 lineto
+583.1 534.4 lineto
+stroke
+201.4 428.8 223.7 428.8 line
+0.2 setlinewidth
+223.7 428.8 252.5 428.8 line
+386.7 436.2 421.1 436.2 line
+0.6 setlinewidth
+223.7 427.6 226.2 428.8 223.7 430 filledtriangle
+386.7 435 389.2 436.2 386.7 437.4 filledtriangle
+160.6 523.7 406.8 523.7 line
+0.6 406.8 523.7 dot
+406.8 529.7 406.8 519.7 line
+0.2 setlinewidth
+406.8 521.3 newpath moveto
+435.1 521.3 lineto
+435.1 533.7 lineto
+stroke
+406.8 528 newpath moveto
+430.1 528 lineto
+430.1 533.7 lineto
+stroke
+0.6 setlinewidth
+406.8 526.8 409.3 528 406.8 529.2 filledtriangle
+406.8 520.1 409.3 521.3 406.8 522.5 filledtriangle
+473.6 529.3 newpath moveto
+464.9 529.3 lineto
+464.9 541.4 lineto
+518.3 541.4 lineto
+518.3 506 lineto
+620.5 506 lineto
+620.5 476.9 lineto
+stroke
+0.4 setlinewidth
+604.5 475.2 618.8 475.2 line
+0.6 setlinewidth
+618.8 475.2 620.5 476.9 line
+494.3 549.4 583.1 549.4 line
+restore
+showpage
+%%Trailer
+end
+%%Pages: 1
+%%EOF
